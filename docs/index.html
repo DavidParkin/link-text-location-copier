@@ -1,0 +1,388 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Link Text and Location Copier</title>
+
+    <link rel="dns-prefetch" href="https://brick.a.ssl.fastly.net/" />
+
+    <link rel="icon" href="images/paint-brush.svg" sizes="any" type="image/svg+xml" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Fira+Mono:400,700/Fira+Sans:400, 400i,700" />
+
+    <meta name="description" content="Link Text and Location Copier: a Firefox WebExtension/Add-on that helps you creating links right from the context menu.">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@evilnickname" />
+    <meta name="twitter:title" content="Link Text and Location Copier" />
+    <meta name="twitter:description" content="Link Text and Location Copier: a Firefox WebExtension/Add-on that helps you creating links right from the context menu." />
+    <meta name="twitter:image" content="https://evilnickname.github.io/link-text-location-copier/images/paint-brush-large.png" />
+    <meta name="twitter:image:alt" content="Link Text and Location Copier logo: a dripping paint brush, reminicent of the copy with formating icon in MS Word." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://evilnickname.github.io/link-text-location-copier/" />
+    <meta property="og:title" content="Link Text and Location Copier" />
+    <meta property="og:description" content="Link Text and Location Copier: a Firefox WebExtension/Add-on that helps you creating links right from the context menu." />
+    <meta property="og:image" content="https://evilnickname.github.io/link-text-location-copier/images/paint-brush-large.png" />
+    <meta property="og:image:width" content="256" />
+    <meta property="og:image:height" content="256" />
+  </head>
+  <body>
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <defs>
+        <symbol id="icon-twitter" viewBox="0 0 26 28">
+          <title>twitter</title>
+          <path d="M25.312 6.375c-0.688 1-1.547 1.891-2.531 2.609 0.016 0.219 0.016 0.438 0.016 0.656 0 6.672-5.078 14.359-14.359 14.359-2.859 0-5.516-0.828-7.75-2.266 0.406 0.047 0.797 0.063 1.219 0.063 2.359 0 4.531-0.797 6.266-2.156-2.219-0.047-4.078-1.5-4.719-3.5 0.313 0.047 0.625 0.078 0.953 0.078 0.453 0 0.906-0.063 1.328-0.172-2.312-0.469-4.047-2.5-4.047-4.953v-0.063c0.672 0.375 1.453 0.609 2.281 0.641-1.359-0.906-2.25-2.453-2.25-4.203 0-0.938 0.25-1.797 0.688-2.547 2.484 3.062 6.219 5.063 10.406 5.281-0.078-0.375-0.125-0.766-0.125-1.156 0-2.781 2.25-5.047 5.047-5.047 1.453 0 2.766 0.609 3.687 1.594 1.141-0.219 2.234-0.641 3.203-1.219-0.375 1.172-1.172 2.156-2.219 2.781 1.016-0.109 2-0.391 2.906-0.781z"></path>
+        </symbol>
+        <symbol id="icon-image" viewBox="0 0 30 28">
+          <title>image</title>
+          <path d="M10 9c0 1.656-1.344 3-3 3s-3-1.344-3-3 1.344-3 3-3 3 1.344 3 3zM26 15v7h-22v-3l5-5 2.5 2.5 8-8zM27.5 4h-25c-0.266 0-0.5 0.234-0.5 0.5v19c0 0.266 0.234 0.5 0.5 0.5h25c0.266 0 0.5-0.234 0.5-0.5v-19c0-0.266-0.234-0.5-0.5-0.5zM30 4.5v19c0 1.375-1.125 2.5-2.5 2.5h-25c-1.375 0-2.5-1.125-2.5-2.5v-19c0-1.375 1.125-2.5 2.5-2.5h25c1.375 0 2.5 1.125 2.5 2.5z"></path>
+        </symbol>
+        <symbol id="icon-book" viewBox="0 0 26 28">
+          <title>book</title>
+          <path d="M25.609 7.469c0.391 0.562 0.5 1.297 0.281 2.016l-4.297 14.156c-0.391 1.328-1.766 2.359-3.109 2.359h-14.422c-1.594 0-3.297-1.266-3.875-2.891-0.25-0.703-0.25-1.391-0.031-1.984 0.031-0.313 0.094-0.625 0.109-1 0.016-0.25-0.125-0.453-0.094-0.641 0.063-0.375 0.391-0.641 0.641-1.062 0.469-0.781 1-2.047 1.172-2.859 0.078-0.297-0.078-0.641 0-0.906 0.078-0.297 0.375-0.516 0.531-0.797 0.422-0.719 0.969-2.109 1.047-2.844 0.031-0.328-0.125-0.688-0.031-0.938 0.109-0.359 0.453-0.516 0.688-0.828 0.375-0.516 1-2 1.094-2.828 0.031-0.266-0.125-0.531-0.078-0.812 0.063-0.297 0.438-0.609 0.688-0.969 0.656-0.969 0.781-3.109 2.766-2.547l-0.016 0.047c0.266-0.063 0.531-0.141 0.797-0.141h11.891c0.734 0 1.391 0.328 1.781 0.875 0.406 0.562 0.5 1.297 0.281 2.031l-4.281 14.156c-0.734 2.406-1.141 2.938-3.125 2.938h-13.578c-0.203 0-0.453 0.047-0.594 0.234-0.125 0.187-0.141 0.328-0.016 0.672 0.313 0.906 1.391 1.094 2.25 1.094h14.422c0.578 0 1.25-0.328 1.422-0.891l4.688-15.422c0.094-0.297 0.094-0.609 0.078-0.891 0.359 0.141 0.688 0.359 0.922 0.672zM8.984 7.5c-0.094 0.281 0.063 0.5 0.344 0.5h9.5c0.266 0 0.562-0.219 0.656-0.5l0.328-1c0.094-0.281-0.063-0.5-0.344-0.5h-9.5c-0.266 0-0.562 0.219-0.656 0.5zM7.688 11.5c-0.094 0.281 0.063 0.5 0.344 0.5h9.5c0.266 0 0.562-0.219 0.656-0.5l0.328-1c0.094-0.281-0.063-0.5-0.344-0.5h-9.5c-0.266 0-0.562 0.219-0.656 0.5z"></path>
+        </symbol>
+        <symbol id="icon-cogs" viewBox="0 0 30 28">
+          <title>cogs</title>
+          <path d="M14 14c0-2.203-1.797-4-4-4s-4 1.797-4 4 1.797 4 4 4 4-1.797 4-4zM26 22c0-1.094-0.906-2-2-2s-2 0.906-2 2c0 1.109 0.906 2 2 2 1.109 0 2-0.906 2-2zM26 6c0-1.094-0.906-2-2-2s-2 0.906-2 2c0 1.109 0.906 2 2 2 1.109 0 2-0.906 2-2zM20 12.578v2.891c0 0.203-0.156 0.438-0.359 0.469l-2.422 0.375c-0.125 0.406-0.297 0.797-0.5 1.188 0.438 0.625 0.906 1.203 1.406 1.797 0.063 0.094 0.109 0.187 0.109 0.313 0 0.109-0.031 0.219-0.109 0.297-0.313 0.422-2.063 2.328-2.516 2.328-0.125 0-0.234-0.047-0.328-0.109l-1.797-1.406c-0.391 0.203-0.781 0.359-1.203 0.484-0.078 0.797-0.156 1.656-0.359 2.422-0.063 0.219-0.25 0.375-0.469 0.375h-2.906c-0.219 0-0.438-0.172-0.469-0.391l-0.359-2.391c-0.406-0.125-0.797-0.297-1.172-0.484l-1.844 1.391c-0.078 0.078-0.203 0.109-0.313 0.109-0.125 0-0.234-0.047-0.328-0.125-0.406-0.375-2.25-2.047-2.25-2.5 0-0.109 0.047-0.203 0.109-0.297 0.453-0.594 0.922-1.172 1.375-1.781-0.219-0.422-0.406-0.844-0.547-1.281l-2.375-0.375c-0.219-0.031-0.375-0.234-0.375-0.453v-2.891c0-0.203 0.156-0.438 0.359-0.469l2.422-0.375c0.125-0.406 0.297-0.797 0.5-1.188-0.438-0.625-0.906-1.203-1.406-1.797-0.063-0.094-0.109-0.203-0.109-0.313s0.031-0.219 0.109-0.313c0.313-0.422 2.063-2.312 2.516-2.312 0.125 0 0.234 0.047 0.328 0.109l1.797 1.406c0.391-0.203 0.781-0.359 1.203-0.5 0.078-0.781 0.156-1.641 0.359-2.406 0.063-0.219 0.25-0.375 0.469-0.375h2.906c0.219 0 0.438 0.172 0.469 0.391l0.359 2.391c0.406 0.125 0.797 0.297 1.172 0.484l1.844-1.391c0.094-0.078 0.203-0.109 0.313-0.109 0.125 0 0.234 0.047 0.328 0.125 0.406 0.375 2.25 2.063 2.25 2.5 0 0.109-0.047 0.203-0.109 0.297-0.453 0.609-0.922 1.172-1.359 1.781 0.203 0.422 0.391 0.844 0.531 1.281l2.375 0.359c0.219 0.047 0.375 0.25 0.375 0.469zM30 20.906v2.188c0 0.234-2.016 0.453-2.328 0.484-0.125 0.297-0.281 0.562-0.469 0.812 0.141 0.313 0.797 1.875 0.797 2.156 0 0.047-0.016 0.078-0.063 0.109-0.187 0.109-1.859 1.109-1.937 1.109-0.203 0-1.375-1.563-1.531-1.797-0.156 0.016-0.313 0.031-0.469 0.031s-0.313-0.016-0.469-0.031c-0.156 0.234-1.328 1.797-1.531 1.797-0.078 0-1.75-1-1.937-1.109-0.047-0.031-0.063-0.078-0.063-0.109 0-0.266 0.656-1.844 0.797-2.156-0.187-0.25-0.344-0.516-0.469-0.812-0.313-0.031-2.328-0.25-2.328-0.484v-2.188c0-0.234 2.016-0.453 2.328-0.484 0.125-0.281 0.281-0.562 0.469-0.812-0.141-0.313-0.797-1.891-0.797-2.156 0-0.031 0.016-0.078 0.063-0.109 0.187-0.094 1.859-1.094 1.937-1.094 0.203 0 1.375 1.547 1.531 1.781 0.156-0.016 0.313-0.031 0.469-0.031s0.313 0.016 0.469 0.031c0.438-0.609 0.906-1.219 1.437-1.75l0.094-0.031c0.078 0 1.75 0.984 1.937 1.094 0.047 0.031 0.063 0.078 0.063 0.109 0 0.281-0.656 1.844-0.797 2.156 0.187 0.25 0.344 0.531 0.469 0.812 0.313 0.031 2.328 0.25 2.328 0.484zM30 4.906v2.187c0 0.234-2.016 0.453-2.328 0.484-0.125 0.297-0.281 0.562-0.469 0.812 0.141 0.313 0.797 1.875 0.797 2.156 0 0.047-0.016 0.078-0.063 0.109-0.187 0.109-1.859 1.109-1.937 1.109-0.203 0-1.375-1.563-1.531-1.797-0.156 0.016-0.313 0.031-0.469 0.031s-0.313-0.016-0.469-0.031c-0.156 0.234-1.328 1.797-1.531 1.797-0.078 0-1.75-1-1.937-1.109-0.047-0.031-0.063-0.078-0.063-0.109 0-0.266 0.656-1.844 0.797-2.156-0.187-0.25-0.344-0.516-0.469-0.812-0.313-0.031-2.328-0.25-2.328-0.484v-2.188c0-0.234 2.016-0.453 2.328-0.484 0.125-0.281 0.281-0.562 0.469-0.812-0.141-0.313-0.797-1.891-0.797-2.156 0-0.031 0.016-0.078 0.063-0.109 0.187-0.094 1.859-1.094 1.937-1.094 0.203 0 1.375 1.547 1.531 1.781 0.156-0.016 0.313-0.031 0.469-0.031s0.313 0.016 0.469 0.031c0.438-0.609 0.906-1.219 1.437-1.75l0.094-0.031c0.078 0 1.75 0.984 1.937 1.094 0.047 0.031 0.063 0.078 0.063 0.109 0 0.281-0.656 1.844-0.797 2.156 0.187 0.25 0.344 0.531 0.469 0.812 0.313 0.031 2.328 0.25 2.328 0.484z"></path>
+        </symbol>
+        <symbol id="icon-edit" viewBox="0 0 28 28">
+          <title>edit</title>
+          <path d="M13.875 18.5l1.813-1.813-2.375-2.375-1.813 1.813v0.875h1.5v1.5h0.875zM20.75 7.25c-0.141-0.141-0.375-0.125-0.516 0.016l-5.469 5.469c-0.141 0.141-0.156 0.375-0.016 0.516s0.375 0.125 0.516-0.016l5.469-5.469c0.141-0.141 0.156-0.375 0.016-0.516zM22 16.531v2.969c0 2.484-2.016 4.5-4.5 4.5h-13c-2.484 0-4.5-2.016-4.5-4.5v-13c0-2.484 2.016-4.5 4.5-4.5h13c0.625 0 1.25 0.125 1.828 0.391 0.141 0.063 0.25 0.203 0.281 0.359 0.031 0.172-0.016 0.328-0.141 0.453l-0.766 0.766c-0.141 0.141-0.328 0.187-0.5 0.125-0.234-0.063-0.469-0.094-0.703-0.094h-13c-1.375 0-2.5 1.125-2.5 2.5v13c0 1.375 1.125 2.5 2.5 2.5h13c1.375 0 2.5-1.125 2.5-2.5v-1.969c0-0.125 0.047-0.25 0.141-0.344l1-1c0.156-0.156 0.359-0.187 0.547-0.109s0.313 0.25 0.313 0.453zM20.5 5l4.5 4.5-10.5 10.5h-4.5v-4.5zM27.438 7.063l-1.437 1.437-4.5-4.5 1.437-1.437c0.578-0.578 1.547-0.578 2.125 0l2.375 2.375c0.578 0.578 0.578 1.547 0 2.125z"></path>
+        </symbol>
+        <symbol id="icon-github-alt" viewBox="0 0 26 28">
+          <title>github-alt</title>
+          <path d="M10 19c0 1.141-0.594 3-2 3s-2-1.859-2-3 0.594-3 2-3 2 1.859 2 3zM20 19c0 1.141-0.594 3-2 3s-2-1.859-2-3 0.594-3 2-3 2 1.859 2 3zM22.5 19c0-2.391-1.453-4.5-4-4.5-1.031 0-2.016 0.187-3.047 0.328-0.812 0.125-1.625 0.172-2.453 0.172s-1.641-0.047-2.453-0.172c-1.016-0.141-2.016-0.328-3.047-0.328-2.547 0-4 2.109-4 4.5 0 4.781 4.375 5.516 8.188 5.516h2.625c3.813 0 8.188-0.734 8.188-5.516zM26 16.25c0 1.734-0.172 3.578-0.953 5.172-2.063 4.172-7.734 4.578-11.797 4.578-4.125 0-10.141-0.359-12.281-4.578-0.797-1.578-0.969-3.437-0.969-5.172 0-2.281 0.625-4.438 2.125-6.188-0.281-0.859-0.422-1.766-0.422-2.656 0-1.172 0.266-2.344 0.797-3.406 2.469 0 4.047 1.078 5.922 2.547 1.578-0.375 3.203-0.547 4.828-0.547 1.469 0 2.953 0.156 4.375 0.5 1.859-1.453 3.437-2.5 5.875-2.5 0.531 1.062 0.797 2.234 0.797 3.406 0 0.891-0.141 1.781-0.422 2.625 1.5 1.766 2.125 3.938 2.125 6.219z"></path>
+        </symbol>
+        <symbol id="icon-envelope" viewBox="0 0 28 28">
+          <title>envelope</title>
+          <path d="M28 11.094v12.406c0 1.375-1.125 2.5-2.5 2.5h-23c-1.375 0-2.5-1.125-2.5-2.5v-12.406c0.469 0.516 1 0.969 1.578 1.359 2.594 1.766 5.219 3.531 7.766 5.391 1.313 0.969 2.938 2.156 4.641 2.156h0.031c1.703 0 3.328-1.188 4.641-2.156 2.547-1.844 5.172-3.625 7.781-5.391 0.562-0.391 1.094-0.844 1.563-1.359zM28 6.5c0 1.75-1.297 3.328-2.672 4.281-2.438 1.687-4.891 3.375-7.313 5.078-1.016 0.703-2.734 2.141-4 2.141h-0.031c-1.266 0-2.984-1.437-4-2.141-2.422-1.703-4.875-3.391-7.297-5.078-1.109-0.75-2.688-2.516-2.688-3.938 0-1.531 0.828-2.844 2.5-2.844h23c1.359 0 2.5 1.125 2.5 2.5z"></path>
+        </symbol>
+        <symbol id="icon-flask" viewBox="0 0 26 28">
+          <title>flask</title>
+          <path d="M23.859 22.625c1.172 1.859 0.344 3.375-1.859 3.375h-18c-2.203 0-3.031-1.516-1.859-3.375l7.859-12.391v-6.234h-1c-0.547 0-1-0.453-1-1s0.453-1 1-1h8c0.547 0 1 0.453 1 1s-0.453 1-1 1h-1v6.234zM11.688 11.297l-4.25 6.703h11.125l-4.25-6.703-0.313-0.484v-6.813h-2v6.813z"></path>
+        </symbol>
+      </defs>
+    </svg>
+
+    <main>
+      <header>
+        <img src="images/paint-brush.svg" alt="" />
+        <h1>Link Text and Location Copier</h1>
+      </header>
+      <div class="forkongithub"><a href="https://github.com/evilnickname/link-text-location-copier">Fork me on GitHub</a></div>
+
+      <article>
+        <h2>About</h2>
+
+        <p><b>Link Text and Location Copier</b> is a <a href="https://www.mozilla.org/en-US/firefox/">Firefox</a> <a href="https://developer.mozilla.org/en-US/Add-ons/WebExtensions">WebExtension</a> that helps you creating links right from the context menu. It copies a link’s text and location, the page title and URL, or selected text and page url as either plain text, HTML, Markdown or BB Code links.</p>
+
+        <div class="meta">
+          <h3 class="meta__title">
+            <img src="images/paint-brush.svg" alt="" />
+            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.8.5</a>
+          </h3>
+          <div class="meta__content">
+            <ul class="meta__data">
+              <li>Released on December 25th, 2018</li>
+              <li><strong>Requires:</strong> Firefox 56+</li>
+            </ul>
+
+            <ul class="meta__links">
+              <li>
+                <svg class="icon icon-image"><use xlink:href="#icon-image"></use></svg>
+                <a href="#screenshots">View screenshots</a>
+              </li>
+              <li>
+                <svg class="icon icon-book"><use xlink:href="#icon-book"></use></svg>
+                <a href="#docs">Custom Format Documentation</a>
+              </li>
+              <li>
+                <svg class="icon icon-cogs"><use xlink:href="#icon-cogs"></use></svg>
+                <a href="#options">Options</a>
+              </li>
+              <li>
+                <svg class="icon icon-edit"><use xlink:href="#icon-edit"></use></svg>
+                <a href="#changelog">Changelog</a>
+              </li>
+              <li>
+                <svg class="icon icon-flask"><use xlink:href="#icon-flask"></use></svg>
+                <a href="./test/">Test page</a>
+              </li>
+              <li>
+                <svg class="icon icon-github-alt"><use xlink:href="#icon-github-alt"></use></svg>
+                <a href="https://github.com/evilnickname/link-text-location-copier">View source on GitHub</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p>It is heavily inspired by <a href="https://addons.mozilla.org/en-US/firefox/addon/colt/">CoLT</a>, one of my favorite add-ons, which <a href="https://www.borngeek.com/2015/08/24/the-future-of-colt-googlebar-lite/">will not be ported for Firefox 57</a>. It is also my first attempt at creating a web extension, so I blatantly stole some code to make it work.</p>
+      </article>
+
+      <article>
+        <h2>Translations</h2>
+        <p><b>Link Text and Location Copier</b> is currently available in English, Dutch and German.</p>
+        <p>If you want to contribute a translation, <a href="#contact">please get in touch</a>.</p>
+      </article>
+
+      <article>
+        <h2>Roadmap</h2>
+        <ul>
+          <li><del>Add fancy icon</del></li>
+          <li><del>Add more 'copy as' formats (Markdown, BBCode, what-have-you)</del></li>
+          <li><del>Internationalization</del></li>
+          <li><del>Come up with better name and/or icon</del></li>
+          <li><del>Add documentation.</del></li>
+          <li><del>Feature Request: Add support for Rich Text format</del></li>
+          <li><del>Make configurable/Customization</del>
+            <ul>
+              <li><del>Toggle local/synced storage</del> (use export/import)</li>
+              <li>Make options page prettier</li>
+              <li>Internationalize options page</li>
+              <li><del>Import/Export settings</del></li>
+              <li>Conditional logic for templates</li>
+              <li>Further enhancements TBA</li>
+            </ul>
+          </li>
+          <li><del>Improve and expose test page</del></li>
+          <li>Add support for copying (linked) images</li>
+          <li>Make extension work in Chrome/Opera/Edge</li>
+        </ul>
+      </article>
+
+      <article id="screenshots">
+        <h2><svg class="icon icon-image"><use xlink:href="#icon-image"></use></svg> Screenshots</h2>
+        <div class="screenshots">
+          <a href="images/contextmenu.jpg" class="screenshot js-lightbox" />
+            <figure class="screenshot__figure">
+                <img src="images/contextmenu.jpg" class="screenshot__image" alt="Screenshot of the context menu" />
+              <figcaption class="screenshot__caption">Context menu</figcaption>
+            </figure>
+          </a>
+
+          <a href="images/optionspage.jpg" class="screenshot js-lightbox" />
+            <figure class="screenshot__figure">
+                <img src="images/optionspage-1.8.5.jpg" class="screenshot__image" alt="Screenshot of the options page" />
+              <figcaption class="screenshot__caption">Options page</figcaption>
+            </figure>
+          </a>
+        </div>
+      </article>
+
+      <article id="changelog">
+        <h2><svg class="icon icon-edit"><use xlink:href="#icon-edit"></use></svg> Changelog</h2>
+        <ul class="changelog">
+          <li><span class="changelog__version">1.8.5</span><time class="changelog__pubdate">2018-12-26</time><span class="changelog__desc">Styling and accessibility tweaks for options page, which now opens in a new tab.</li>
+          <li><span class="changelog__version">1.8.1</span><time class="changelog__pubdate">2018-09-16</time><span class="changelog__desc">Set <code>accept</code> attribute of settings import file input to filter for JSON files by default.</span></li>
+          <li><span class="changelog__version">1.8.0</span><time class="changelog__pubdate">2018-08-28</time><span class="changelog__desc">UTM-paramaters are now stripped from the copied link by default.</span></li>
+          <li><span class="changelog__version">1.7.2</span><time class="changelog__pubdate">2018-05-25</time><span class="changelog__desc">Fixes an issue where the link location was <code>undefined</code> for text selections when using %U.</span></li>
+          <li><span class="changelog__version">1.7.1</span><time class="changelog__pubdate">2018-05-22</time><span class="changelog__desc">Fixed a stupid bug where the values of %linktitle% and %linkurl% were the wrong way around.</span></li>
+          <li><span class="changelog__version">1.7.0</span><time class="changelog__pubdate">2018-04-19</time><span class="changelog__desc">Export and import your customized settings. Enabling editing of rich text.</span></li>
+          <li><span class="changelog__version">1.6.0</span><time class="changelog__pubdate">2018-02-22</time><span class="changelog__desc">Enables support for copying from inside an (i)frame. Adds %documenturl% variable.</span></li>
+          <li><span class="changelog__version">1.5.1</span><time class="changelog__pubdate">2018-02-05</time><span class="changelog__desc">Fixed a stupid bug where the values of %pageurl% and %pagetitle% were the wrong way around.</span></li>
+          <li><span class="changelog__version">1.5.0</span><time class="changelog__pubdate">2018-02-04</time><span class="changelog__desc">Added context independent custom format variables. Added option to disable context menu prefix.</span></li>
+          <li><span class="changelog__version">1.4.5</span><time class="changelog__pubdate">2017-11-30</time><span class="changelog__desc">Add option to disable encoding non-ANSI characters in link location.</span></li>
+          <li><span class="changelog__version">1.4.4</span><time class="changelog__pubdate">2017-11-21</time><span class="changelog__desc">Fix broken Cyrillic links by changing the order in which the templates get parsed.</span></li>
+          <li><span class="changelog__version">1.4.3</span><time class="changelog__pubdate">2017-11-17</time><span class="changelog__desc">Provisional support for Image Location added. Only works when right-clicking on a linked image, otherwise returns an empty string.</span></li>
+          <li><span class="changelog__version">1.4.2</span><time class="changelog__pubdate">2017-11-15</time><span class="changelog__desc">Added support for newline, tab and local time variables in templates. Variables can now be used multiple times in a template.</span></li>
+          <li><span class="changelog__version">1.4.1</span><time class="changelog__pubdate">2017-10-23</time><span class="changelog__desc">Added Rich Text support (for copying links to Word/Outlook/etc.).</span></li>
+          <li><span class="changelog__version">1.4.0</span><time class="changelog__pubdate">2017-10-23</time><span class="changelog__desc">Added support for custom formats. Add, remove and/or reorder formats from the options page. Changed icon.</span></li>
+          <li><span class="changelog__version">1.3.1</span><time class="changelog__pubdate">2017-09-27</time><span class="changelog__desc">Fixed a bug where “copy link text and location as …” copied the page location instead of link location.</span></li>
+          <li><span class="changelog__version">1.3.0</span><time class="changelog__pubdate">2017-09-21</time><span class="changelog__desc">Adds support for copying selected text and page title.</span></li>
+          <li><span class="changelog__version">1.2.0</span><time class="changelog__pubdate">2017-09-18</time><span class="changelog__desc">Internationalization. Added Dutch and German translations.</span></li>
+          <li><span class="changelog__version">1.1.0</span><time class="changelog__pubdate">2017-09-14</time><span class="changelog__desc">Added support for Markdown and BB Code.</span></li>
+          <li><span class="changelog__version">1.0.2</span><time class="changelog__pubdate">2017-09-13</time><span class="changelog__desc">In “Copy page title and location as HTML” the title and url were in the wrong location.</span></li>
+          <li><span class="changelog__version">1.0.1</span><time class="changelog__pubdate">2017-09-11</time><span class="changelog__desc">Icon added.</span></li>
+          <li><span class="changelog__version">1.0.0</span><time class="changelog__pubdate">2017-09-11</time><span class="changelog__desc">Initial release.</span></li>
+        </ul>
+        <p>Note: Not all old versions are available on <abbr title="Addons.Mozilla.Org">AMO</abbr>. Versions with stupid bugs are disabled.</p>
+      </article>
+
+      <article>
+        <h2>Known issues</h2>
+        <ul>
+          <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1343236">Before Firefox 56</a> the link title will always be “undefined”.</li>
+          <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1338898">Before Firefox 56</a> text selection is limited to 150 characters.</li>
+          <li>The title and url of pages inside a (i)frame cannot be copied.</li>
+          <li>If you have set the about:config preference <code>dom.event.clipboardevents.enabled</code> to <b>false</b>, this add-on will not work.</li>
+          <li><b>Link Text and Location Copier</b> will not work on XML documents, as these do not support <code>document.execCommand(copy)</code>.</li>
+        </ul>
+      </article>
+
+      <article id="docs">
+        <h2><svg class="icon icon-book"><use xlink:href="#icon-book"></use></svg> Custom Format Documentation</h2>
+
+        <p>Easy as pie: with the variables listed below, create whatever format you need.</p>
+        <table>
+          <caption>Context dependant custom format variables<br /> <i>(Deprecated. Will probably be removed in version 2.)</i></caption>
+          <thead>
+            <tr>
+              <th scope="col">Variable</th>
+              <th scope="col">Link</th>
+              <th scope="col">Page</th>
+              <th scope="col">Selection</th>
+              <th scope="col">Image inside a link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">%T</th>
+              <td>Link text</td>
+              <td>Page title</td>
+              <td>Selected text <a href="#n1">1</a></td>
+              <td>All text inside the link <a href="#n1">1</a></td>
+            </tr>
+            <tr>
+              <th scope="row">%U</th>
+              <td>Link URL</td>
+              <td>Page URL</td>
+              <td>Document URL <a href="#n2">2</a></td>
+              <td>Link URL</td>
+            </tr>
+            <tr>
+              <th scope="row">%I</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Image URL</td>
+            </tr>
+          <tbody>
+        </table>
+
+        <table>
+          <caption>Context independent custom format variables</caption>
+          <thead>
+            <tr>
+              <th scope="col">Variable</th>
+              <th scope="col">Value</th>
+            </tr>
+          </thead>
+            <tr>
+              <th scope="row">%linktitle%</th>
+              <td>Link title <a href="#n3">3</a></td>
+            </tr>
+            <tr>
+              <th scope="row">%linkurl%</th>
+              <td>Link URL <a href="#n3">3</a></td>
+            </tr>
+            <tr>
+              <th scope="row">%pagetitle%</th>
+              <td>Page title</td>
+            </tr>
+            <tr>
+              <th scope="row">%pageurl%</th>
+              <td>URL of the page (i.e., the URL in the addressbar)</td>
+            </tr>
+            <tr>
+              <th scope="row">%documenturl%</th>
+              <td>URL of the document containing to be copied link/selection <a href="#n2">2</a></td>
+            </tr>
+            <tr>
+              <th scope="row">%selection%</th>
+              <td>Selected text <a href="#n3">3</a></td>
+            </tr>
+            <tr>
+              <th scope="row">%N</th>
+              <td>Newline character <a href="#n4">4</a></td>
+            </tr>
+            <tr>
+              <th scope="row">%B</th>
+              <td>Tab character</td>
+            </tr>
+            <tr>
+              <th scope="row">%L</th>
+              <td>Localized time stamp</td>
+            </tr>
+          </tbody>
+        </table>
+        <ol>
+          <li id="n1">Including an image’s <code>alt</code>-attribute</li>
+          <li id="n2">When used inside a (i)frame, it will return the URL of the framed page.</li>
+          <li id="n3">Will return an empty string when unavailable.</li>
+          <li id="n4"><code>\n</code>. For HTML, you can insert <code>&lt;br /&gt;</code> into the template.</li>
+        </ol>
+      </article>
+
+      <article id="options">
+        <h2><svg class="icon icon-cogs"><use xlink:href="#icon-cogs"></use></svg> Options</h2>
+
+        <ul>
+          <li id="option-urls">
+            <h3>Don’t encode link location</h3>
+            <p>Firefox encodes non-<abbr>ANSI</abbr> characters (Cyrillic, Greek, Vietnamese, what-have-you) in <a href="https://developer.mozilla.org/en-US/docs/Glossary/URL">URL</a>s by default when copying. Links like <code>https://ru.wikipedia.org/wiki/Браузер</code> get turned into <code>https://ru.wikipedia.org/wiki/%D0%91%D1%80%D0%B0%D1%83%D0%B7%D0%B5%D1%80</code> when pasted.</p>
+            <p>To prevent this, turn this feature on and save settings.</p>
+          </li>
+          <li id="strip-utm">
+            <h3>Don’t strip UTM paramaters from link</h3>
+            <p>Some links include <code>utm_</code>-parameters, which are used to send tracking information to Google Analytics. <b>Link Text and Location Copier</b> strips these by default.</p>
+            <p>To override this, turn this feature on and save settings.</p>
+          </li>
+          <li id="override-menu">
+            <h3>Don’t show context menu prefix</h3>
+            <p>By default, <b>Link Text and Location Copier</b> shows a “Copy … as ” prefix in te context menu before the <code>menu label</code> you set as custom format. This option allows you to overide this behavior, and uses the <code>menu label</code> <em>as is</em> in the context menu.</p>
+          </li>
+          <li id="rich-text">
+            <h3>Output as rich text</h3>
+            <p>Useful for copying links straight into word processors or email clients. For this to work, the custom format <em>should</em> be an <abbr>HTML</abbr>-string. (The custom format will <em>not</em> be validated.)</p>
+        </ul>
+      </article>
+
+      <article>
+        <h2>Credits / Acknowledgements</h2>
+        <ul>
+          <li>Totally inspired by/based on Jonah Bishop’s <a href="https://www.borngeek.com/firefox/colt/">CoLT</a>. (<a href="https://github.com/jgbishop/colt/blob/master/LICENSE.txt">license</a>)</li>
+          <li>The Copy-to-clipboard functionality is lifted from Firefox’s <a href="https://github.com/mdn/webextensions-examples/tree/master/context-menu-copy-link-with-types">context-menu-copy-link-with-types</a> example. (<a href="https://github.com/mdn/webextensions-examples/blob/master/LICENSE">license</a>)</li>
+          <li>Thanks to <a href="https://github.com/def00111">def00111</a> for alerting me to the (i)frame issue resolved in version 1.6.0.</li>
+          <li>The <a href="https://www.flaticon.com/free-icon/paint-brush_178388">Paint Brush Icon</a> made by Flat Icons is licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC 3.0 BY</a></li>
+          <li>The icons on this page are from <a href="http://fontawesome.io">Font Awesome</a>, subsetted through the <a href="https://icomoon.io/">IcoMoon App</a>.
+        </ul>
+      </article>
+
+      <article id="contact">
+        <h2><svg class="icon icon-envelope"><use xlink:href="#icon-envelope"></use></svg> Contact</h2>
+        <p>If you have a feature requests or bug report, if you want to help out with translations, or if you just want to get in touch, here are a few options:</p>
+        <ul>
+          <li>
+            <svg class="icon icon-github-alt"><use xlink:href="#icon-github-alt"></use></svg> <a href="https://github.com/evilnickname/link-text-location-copier/issues">GitHub</a>
+          </li>
+          <li><svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg> <a href="https://twitter.com/evilnickname">@evilnickname</a></li>
+          <li><svg class="icon icon-envelope"><use xlink:href="#icon-envelope"></use></svg> <a href="#">E-mail</a><span class="emaillink" hidden>moc&#x002E;liamg&#x0040;reipoc-noitacol-txet-knil+eman<span class="i">null</span>kcinlive</span></li>
+        </ul>
+      </article>
+      <footer>
+        <small><span id="copyright">© 2018</span> <a href="https://www.evilnickname.org/">William Groenendijk</a>.</small>
+      </footer>
+    </main>
+
+    <script>
+      (function(d) {
+
+        var screenshots = d.querySelectorAll('.js-lightbox'), i, n = screenshots.length;
+        for (i = 0; i < n; i++) {
+          screenshots[i].style.width = screenshots[i].clientWidth + 'px';
+          screenshots[i].addEventListener('click', function(event) {
+            this.classList.toggle('is-lightbox');
+            event.preventDefault();
+          })
+        }
+
+        var email = d.querySelector('span.emaillink');
+        email.removeChild(email.querySelector('.i'));
+        email.previousElementSibling.setAttribute('href', 'mailto:' + email.innerText.split('').reverse().join(''));
+
+        if (new Date().getFullYear() > 2018) {
+          d.getElementById('copyright').textContent =  '© 2018–' + new Date().getFullYear();
+        }
+      })(document);
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2000357-6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-2000357-6');
+    </script>
+  </body>
+</html>

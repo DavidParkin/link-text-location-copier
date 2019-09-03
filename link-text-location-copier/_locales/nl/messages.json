@@ -1,0 +1,27 @@
+{
+  "extensionDescription": {
+    "message": "Kopieer links in diverse formaten vanuit het contextmenu. Gebaseerd op de CoLT add-on.",
+    "description": "Description of the extension."
+  },
+
+  "copyLinkLocationString": {
+    "message": "Koppelingstekst en -adres kopiëren als",
+    "description": "Translation of 'Copy link text and location as'"
+  },
+  "copyPageLocationString": {
+    "message": "Paginatitel en -adres kopiëren als",
+    "description": "Translation of 'Copy page title and location as'"
+  },
+  "copySelectionLocationString": {
+    "message": "Geselecteerde tekst en pagina-adres kopiëren als",
+    "description": "Translation of 'Copy text selection and page location as'"
+  },
+  "copyLinkTextString": {
+    "message": "Kopieer koppelingstekst",
+    "description": "Translation of 'Copy link text'"
+  },
+  "plainTextString": {
+    "message": "platte tekst",
+    "description": "Translation of 'plain text'"
+  }
+}

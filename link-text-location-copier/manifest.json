@@ -1,0 +1,39 @@
+{
+  "manifest_version": 2,
+  "name": "Link Text and Location Copier",
+  "description": "__MSG_extensionDescription__",
+  "version": "1.8.5",
+  "homepage_url": "https://evilnickname.github.io/link-text-location-copier",
+  "default_locale": "en",
+
+  "background": {
+    "scripts": [
+      "defaults.js",
+      "linktextlocationcopier.js"
+    ]
+  },
+
+  "options_ui": {
+    "browser_style": false,
+    "open_in_tab": true,
+    "page": "options/index.html"
+  },
+
+  "icons": {
+    "48": "paint-brush.svg",
+    "96": "paint-brush.svg"
+  },
+
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "clipboardWrite",
+    "storage"
+  ],
+
+  "applications": {
+    "gecko": {
+      "id": "{ecdeca5f-93eb-4757-8cad-9c4ab7568649}"
+    }
+  }
+}
