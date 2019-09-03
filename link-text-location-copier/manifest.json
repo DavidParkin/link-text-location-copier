@@ -8,13 +8,13 @@
 
   "background": {
     "scripts": [
+	  "browser-polyfill.js",
       "defaults.js",
       "linktextlocationcopier.js"
     ]
   },
 
   "options_ui": {
-    "browser_style": false,
     "open_in_tab": true,
     "page": "options/index.html"
   },
@@ -28,12 +28,8 @@
     "activeTab",
     "contextMenus",
     "clipboardWrite",
+	 "tabs", "http://*/*", "https://*/*",
     "storage"
-  ],
+  ]
 
-  "applications": {
-    "gecko": {
-      "id": "{ecdeca5f-93eb-4757-8cad-9c4ab7568649}"
-    }
   }
-}
